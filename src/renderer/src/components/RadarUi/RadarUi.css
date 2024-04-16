@@ -1,0 +1,104 @@
+:root {
+  --radar-view: 500px;
+  --radar-text-color: gray;
+  --radar-line-color: rgb(26, 23, 23);
+  --bg-color: rgb(239, 238, 238);
+  --radar-bg: rgba(118, 118, 120, 0.2);
+  --scanningLine-shadow: 0 0 10px 5px rgba(0, 0, 252, 0.3);
+}
+
+body {
+  min-width: 100vw; /* Adjusted width */
+  min-height: 100vh; /* Adjusted height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+}
+body.dark {
+  --radar-text-color: rgb(186, 182, 182);
+  --radar-line-color: rgb(171, 169, 169);
+  --bg-color: rgb(19, 18, 18);
+  --radar-bg: rgba(117, 117, 117, 0.2);
+  --scanningLine-shadow: 0 0 20px 10px rgba(0, 0, 252, 0.5);
+}
+
+#radar-container {
+  padding: 20px; /* Padding adjusted accordingly */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#radar {
+  width: var(--radar-view);
+  aspect-ratio: 1/1;
+  background-color: var(--radar-bg);
+  position: relative;
+  border-radius: 50%;
+  color: var(--radar-text-color);
+}
+
+.target {
+  position: absolute;
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform-origin: center;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+.line {
+  position: absolute;
+  width: calc(50% - 5px); /* Half the radar's width minus half the target's width */
+  height: 1px;
+  background-color: var(--radar-line-color);
+  transform-origin: 0 50%;
+  left: 50%;
+  top: 50%;
+}
+
+.angle-label {
+  position: absolute;
+  font-size: 12px;
+  transform-origin: center;
+  text-align: center;
+  width: 100%;
+  top: -20px; /* Adjust label position */
+}
+
+.label-text {
+  position: absolute;
+  font-size: 10px;
+  pointer-events: none;
+  white-space: nowrap; /* Prevents text from wrapping */
+  font-weight: bolder;
+}
+
+.distance-circle {
+  position: absolute;
+  border: 1px solid var(--radar-line-color);
+  border-radius: 50%;
+  width: var(--radar-view);
+  aspect-ratio: 1/1;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* Prevents the circle from blocking interactions */
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.scanning-line {
+  position: absolute;
+  width: calc(50% - 5px); /* Half the radar's width minus half the target's width */
+  height: 2px;
+  background:
+    linear-gradient(to right, rgba(0, 0, 255, 0.5), transparent),
+    /* Blue gradient */ linear-gradient(to right, transparent, rgba(0, 0, 255, 0.5));
+  /* Add blue glow effect */
+  box-shadow: var(--scanningLine-shadow); /* Adjust blur and color as needed */
+  transform-origin: 0 50%;
+  left: 50%;
+  top: 50%;
+}
